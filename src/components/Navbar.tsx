@@ -1,9 +1,10 @@
+import { signOut } from "firebase/auth";
 import { List } from "phosphor-react";
+import { auth } from "../firebase";
 import useMenuStore from "../hooks/useMenuStore";
 
 const Navbar = () => {
-  const {  setMenuIsOpen } = useMenuStore();
-
+  const { setMenuIsOpen } = useMenuStore();
 
   return (
     <div className="sticky top-0 flex h-16 items-center justify-between border-b p-4">
@@ -24,7 +25,12 @@ const Navbar = () => {
           <span className="font-semibold">Jane Smith</span>
         </div>
 
-        <button className="bg-blue-500 p-3 text-white uppercase">logout</button>
+        <button
+          className="bg-blue-500 p-3 uppercase text-white"
+          onClick={() => signOut(auth)}
+        >
+          logout
+        </button>
       </div>
     </div>
   );
