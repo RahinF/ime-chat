@@ -145,7 +145,10 @@ const Register = () => {
           </div>
 
           <div className="mt-8 flex w-full flex-col gap-6">
-            <button className="bg-blue-500 p-3 uppercase text-white">
+            <button
+              className="bg-blue-500 p-3 uppercase text-white"
+              disabled={isLoading}
+            >
               {isLoading ? "creating account..." : "register"}
             </button>
             <span className="self-center">
