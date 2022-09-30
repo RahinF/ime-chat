@@ -2,13 +2,13 @@ import create from "zustand";
 
 interface AuthState {
   user: User | null;
-  setUser: (user: User | null) => void;
+  setUser: (user: User) => void;
 }
 
 interface User {
   displayName: string | null;
   photoURL: string | null;
-  uid: string | null;
+  uid: string;
 }
 
 const useAuthStore = create<AuthState>((set) => ({

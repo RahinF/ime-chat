@@ -1,10 +1,15 @@
 import { signOut } from "firebase/auth";
 import { List } from "phosphor-react";
 import { auth } from "../firebase";
+import useAuthStore from "../hooks/useAuthStore";
 import useMenuStore from "../hooks/useMenuStore";
+import Placeholder from "../assets/avatar_placeholder.png";
 
 const Navbar = () => {
   const { setMenuIsOpen } = useMenuStore();
+  const { user } = useAuthStore();
+
+  console.log(user);
 
   return (
     <div className="sticky top-0 flex h-16 items-center justify-between border-b p-4">
@@ -21,8 +26,12 @@ const Navbar = () => {
 
       <div className="flex gap-4">
         <div className="flex items-center gap-2">
-          <div className="h-12 w-12 shrink-0 rounded-full bg-blue-300" />
-          <span className="font-semibold">Jane Smith</span>
+          <img
+            className="h-12 w-12 shrink-0 rounded-full bg-blue-300"
+            src={user?.photoURL || Placeholder}
+            alt="avatar"
+          />
+          <span className="font-semibold">{user?.displayName}</span>
         </div>
 
         <button
