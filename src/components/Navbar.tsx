@@ -9,8 +9,6 @@ const Navbar = () => {
   const { setMenuIsOpen } = useMenuStore();
   const { user } = useAuthStore();
 
-  console.log(user);
-
   return (
     <div className="sticky top-0 flex h-16 items-center justify-between border-b p-4">
       <div className="flex items-center gap-2">
@@ -27,11 +25,11 @@ const Navbar = () => {
       <div className="flex gap-4">
         <div className="flex items-center gap-2">
           <img
-            className="h-12 w-12 shrink-0 rounded-full bg-blue-300"
+            className="h-12 w-12 shrink-0 rounded-full object-cover"
             src={user?.photoURL || Placeholder}
             alt="avatar"
           />
-          <span className="font-semibold">{user?.displayName}</span>
+          <div className="font-semibold">{user?.displayName}</div>
         </div>
 
         <button

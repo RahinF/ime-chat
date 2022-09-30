@@ -2,7 +2,7 @@ const Message = () => {
   return (
     <div className="flex gap-4">
       <div className="h-12 w-12 shrink-0 rounded-full bg-blue-900" />
-      <div className="flex flex-col gap-1 ">
+      <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">
           <span className="font-bold">John Smith</span>
           <span className="text-xs">just now</span>
