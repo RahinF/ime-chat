@@ -38,6 +38,12 @@ const Login = () => {
       <div className="w-full max-w-md bg-white py-4">
         <h1 className="my-4 text-center text-2xl">Login</h1>
 
+        {error && (
+          <span className="mb-6 block text-center text-red-500">
+            Something went wrong...
+          </span>
+        )}
+
         <form
           className="m-auto flex max-w-sm flex-col items-center gap-2 px-4"
           onSubmit={handleSubmit}
