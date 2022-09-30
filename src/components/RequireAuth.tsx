@@ -11,18 +11,18 @@ const RequireAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    try {
-      onAuthStateChanged(auth, (user) => {
-        if (!user) return;
+   
+     const unsub = onAuthStateChanged(auth, (user) => {
+       if (!user) return;
 
-        const { displayName, photoURL, uid } = user;
-        setUser({ displayName, photoURL, uid });
-        setIsLoggedIn(true);
-        setIsLoading(false);
-      });
-    } catch (error) {
-      console.log(error);
-    }
+       const { displayName, photoURL, uid } = user;
+       setUser({ displayName, photoURL, uid });
+       setIsLoggedIn(true);
+       setIsLoading(false);
+     });
+     return () => {
+       unsub();
+     };
   }, [setUser]);
 
   if (isLoading)
