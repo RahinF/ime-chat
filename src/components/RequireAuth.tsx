@@ -13,12 +13,15 @@ const RequireAuth = () => {
   useEffect(() => {
    
      const unsub = onAuthStateChanged(auth, (user) => {
-       if (!user) return;
+       if (!user) return setIsLoading(false);
 
        const { displayName, photoURL, uid } = user;
        setUser({ displayName, photoURL, uid });
        setIsLoggedIn(true);
        setIsLoading(false);
+     
+
+   
      });
      return () => {
        unsub();
