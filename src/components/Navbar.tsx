@@ -7,7 +7,12 @@ import Placeholder from "../assets/avatar_placeholder.png";
 
 const Navbar = () => {
   const { setMenuIsOpen } = useMenuStore();
-  const { currentUser } = useUserStore();
+  const { currentUser, setCurrentUser } = useUserStore();
+
+  const handleLogout = () => {
+    signOut(auth);
+    setCurrentUser(null);
+  };
 
   return (
     <div className="sticky top-0 flex h-16 items-center justify-between border-b p-4">
@@ -34,7 +39,7 @@ const Navbar = () => {
 
         <button
           className="bg-blue-500 p-3 uppercase text-white"
-          onClick={() => signOut(auth)}
+          onClick={handleLogout}
         >
           logout
         </button>

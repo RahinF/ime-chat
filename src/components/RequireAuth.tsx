@@ -5,7 +5,7 @@ import { auth } from "../firebase";
 import useUserStore from "../hooks/useUserStore";
 
 const RequireAuth = () => {
-  const { setCurrentUser } = useUserStore();
+  const { currentUser, setCurrentUser } = useUserStore();
 
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,6 +23,11 @@ const RequireAuth = () => {
       unsub();
     };
   }, [setCurrentUser]);
+
+  useEffect(() => {
+    if (!currentUser) return setIsLoggedIn(false);
+  }, [currentUser]);
+  
 
   if (isLoading)
     return (
