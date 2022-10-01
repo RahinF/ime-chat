@@ -4,6 +4,7 @@ import { db } from "../firebase";
 import IUser from "../types/IUser";
 import Placeholder from "../assets/avatar_placeholder.png";
 import IMessage from "../types/IMessage";
+import { timeAgoOrDate } from "../utils/date";
 
 const Message = ({ message }: { message: IMessage }) => {
   const [user, setUser] = useState<IUser | null>(null);
@@ -32,7 +33,9 @@ const Message = ({ message }: { message: IMessage }) => {
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">
           <span className="font-bold">{user?.displayName}</span>
-          <span className="text-xs">date</span>
+          <span className="text-xs">
+            {timeAgoOrDate(new Date(message.date.seconds * 1000))}
+          </span>
         </div>
         <div className="flex flex-col items-start gap-2">
           {message.image && (
