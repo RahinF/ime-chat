@@ -1,21 +1,18 @@
 import create from "zustand";
+import IUser from "../types/IUser";
 
 interface UserState {
-  currentUser: User | null;
-  setCurrentUser: (currentUser: User) => void;
+  currentUser: IUser | null;
+  setCurrentUser: (currentUser: IUser | null) => void;
 
   chatId: string | null;
   setChatId: (chatId: string | null) => void;
 
-  chatUser: User | null;
-  setChatUser: (chatUser: User) => void;
+  chatUser: IUser | null;
+  setChatUser: (chatUser: IUser) => void;
 }
 
-interface User {
-  displayName: string | null;
-  photoURL: string | null;
-  uid: string;
-}
+
 
 const useUserStore = create<UserState>((set, get) => ({
   currentUser: null,

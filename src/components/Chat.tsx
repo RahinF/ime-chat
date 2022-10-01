@@ -1,20 +1,13 @@
-import { doc, DocumentData, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Placeholder from "../assets/avatar_placeholder.png";
 import { db } from "../firebase";
 import useUserStore from "../hooks/useUserStore";
+import IChat from "../types/IChat";
+import IUser from "../types/IUser";
 
-interface ChatType {
-  date: {
-    nanoseconds: number;
-    seconds: number;
-  };
-
-  uid: string;
-}
-
-const Chat = ({ chat }: { chat: ChatType }) => {
-  const [user, setUser] = useState<DocumentData | null>(null);
+const Chat = ({ chat }: { chat: IChat }) => {
+  const [user, setUser] = useState<IUser | null>(null);
 
   const { setChatUser } = useUserStore();
 
@@ -22,7 +15,8 @@ const Chat = ({ chat }: { chat: ChatType }) => {
     if (!chat.uid) return;
     const unsub = onSnapshot(doc(db, "users", chat.uid), (doc) => {
       if (doc.exists()) {
-        setUser(doc.data());
+        const user = doc.data() as IUser;
+        setUser(user);
       }
     });
 
@@ -50,11 +44,9 @@ const Chat = ({ chat }: { chat: ChatType }) => {
       />
       <div>
         <div className="font-bold">{user?.displayName}</div>
+
         <div className="w-40 truncate">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-          praesentium dolore nesciunt provident placeat alias temporibus!
-          Dolorem minima, aliquid provident inventore sed ex quis maiores
-          eveniet dolores similique, alias qui.
+          {chat.lastMessage?.text || "no messages"}
         </div>
       </div>
     </div>
