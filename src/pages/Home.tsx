@@ -1,4 +1,4 @@
-import Chat from "../components/Chat";
+import Chatbox from "../components/Chatbox";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 
@@ -8,7 +8,7 @@ const Home = () => {
       <Navbar />
       <div className="flex h-[calc(100vh_-_64px)]">
         <Sidebar />
-        <Chat />
+        <Chatbox />
       </div>
     </div>
   );

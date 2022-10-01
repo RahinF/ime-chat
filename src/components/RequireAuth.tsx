@@ -2,31 +2,27 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { auth } from "../firebase";
-import useAuthStore from "../hooks/useAuthStore";
+import useUserStore from "../hooks/useUserStore";
 
 const RequireAuth = () => {
-  const { setUser } = useAuthStore();
+  const { setCurrentUser } = useUserStore();
 
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-   
-     const unsub = onAuthStateChanged(auth, (user) => {
-       if (!user) return setIsLoading(false);
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (!user) return setIsLoading(false);
 
-       const { displayName, photoURL, uid } = user;
-       setUser({ displayName, photoURL, uid });
-       setIsLoggedIn(true);
-       setIsLoading(false);
-     
-
-   
-     });
-     return () => {
-       unsub();
-     };
-  }, [setUser]);
+      const { displayName, photoURL, uid } = user;
+      setCurrentUser({ displayName, photoURL, uid });
+      setIsLoggedIn(true);
+      setIsLoading(false);
+    });
+    return () => {
+      unsub();
+    };
+  }, [setCurrentUser]);
 
   if (isLoading)
     return (
