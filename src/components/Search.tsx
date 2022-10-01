@@ -36,7 +36,7 @@ const Search = () => {
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
       });
-    } catch (err) {
+    } catch (error) {
       setError(true);
     }
   };
